@@ -1,0 +1,47 @@
+<div ui-view></div>
+
+<div ng-hide="$state.includes('main.products.ordersList.orderDetails')" class="center_title_bar">Zamówienia</div>
+<div ng-hide="$state.includes('main.products.ordersList.orderDetails')" class="prod_box_big">
+    <div ng-show="showAdmin=='correct'">
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Data</th>
+                <th>Wartość</th>
+                <th></th>
+                <th></th>
+            </tr>
+			<tr ng-repeat="order in orders">
+                <th><input class="edit" type="text" ng-model="order.id_ord" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="order.order_date" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="order.paid" style="border:none;background:none;" readonly /></th>
+                <th>
+					<button ng-click="putOrderId(order.id_ord);getOrderId()" class="edit-bt">
+						<a ui-sref="main.products.ordersList.orderDetails">szczegóły</a>
+					</button>
+				</th>
+                <th><button ng-click="deleteOrder(order.id_ord)" class="edit-bt">usuń</button></th>
+            </tr>
+        </table>
+    </div>
+	<div ng-show="showUser=='correct'">
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Data</th>
+                <th>Wartość</th>
+                <th></th>
+            </tr>
+			<tr ng-repeat="order in orders | filter: {id_user: current}">
+                <th><input class="edit" type="text" ng-model="order.id_ord" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="order.order_date" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="order.paid" style="border:none;background:none;" readonly /></th>
+                <th>
+					<button ng-click="putOrderId(order.id_ord);getOrderId()" class="edit-bt">
+						<a ui-sref="main.products.ordersList.orderDetails">szczegóły</a>
+					</button>
+				</th>
+            </tr>
+        </table>
+    </div>
+</div>

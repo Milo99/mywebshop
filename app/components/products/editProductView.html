@@ -1,0 +1,36 @@
+<div class="center_title_bar">Edytuj produkt {{myitem}}</div>
+<div>
+    <div class="prod_box_big" ng-show="showAdmin=='correct'" ng-repeat="product in products | filter:{id_prod: myitem}">
+        <div class="center_prod_box_big">
+            <div class="contact_form">
+                <div>
+                    <img src="{{product.url_thumb}}" alt="{{product.name_prod}}" border="0" style="height:120px;" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Nazwa:</strong></label>
+                    <input type="text" class="contact_input" ng-model="product.name_prod" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Cena(zł):</strong></label>
+                    <input type="text" class="contact_input" ng-model="product.price_gross" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Zniżka(%):</strong></label>
+                    <input type="text" class="contact_input" ng-model="product.disc" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Zdjęcie:</strong></label>
+                    <input type="text" class="contact_input" ng-model="product.url_thumb" />
+                </div>
+                <div class="form_row" ng-click="changeItem(product.id_prod,product.name_prod,product.price_gross,product.disc,product.url_thumb,product.description)">
+                    <a href="" class="prod_details">Zapisz</a>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Opis:</strong></label>
+                    <textarea class="contact_textarea" ng-model="product.description" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

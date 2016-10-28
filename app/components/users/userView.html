@@ -1,0 +1,40 @@
+<div class="center_title_bar">Załóż konto</div>
+<div class="prod_box_big">
+    <div class="center_prod_box_big">
+        <div class="contact_form">
+            <div class="form_row">
+                <label class="contact"><strong>Imię:</strong></label>
+                <input type="text" class="contact_input" ng-model="firstname" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Nazwisko:</strong></label>
+                <input type="text" class="contact_input" ng-model="lastname" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Adres:</strong></label>
+                <input type="text" class="contact_input" ng-model="address" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Email:</strong></label>
+                <input type="email" class="contact_input" ng-model="mail" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Telefon:</strong></label>
+                <input type="text" class="contact_input" ng-model="phone" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Login:</strong></label>
+                <input type="text" class="contact_input" ng-model="login" required/>
+                <span ng-show="firstname.$invalid">To pole jest wymagane</span>
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Hasło:</strong></label>
+                <input type="password" class="contact_input" ng-model="pass" required/>
+                <span ng-show="firstname.$invalid">To pole jest wymagane</span>
+            </div>
+            <div class="form_row" ng-click="addItem(firstname,lastname,address,mail,phone,login,pass)">
+                <a href="" class="prod_details">Zapisz</a>
+            </div>
+        </div>
+    </div>
+</div>

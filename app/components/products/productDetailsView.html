@@ -1,0 +1,35 @@
+
+<div ui-view></div>
+<div ng-hide="$state.includes('main.products.productDetails.shoppingCart')" ng-repeat="product in products | filter:{id_prod: myitem}">
+    <div class="center_title_bar">{{product.name_prod}}</div>
+    <div class="prod_box_big">
+        <div class="center_prod_box_big">
+            <div class="product_img_big">
+                <img src="{{product.url_thumb}}" alt="{{product.name_prod}}" border="0" style="height:120px;" />
+            </div>
+            <div class="details_big_box">
+                <div class="product_title_big">{{product.name_prod}}</div>
+                <div class="specifications"> 
+					Dostępność: <span class="blue">Na magazynie</span><br />
+					Gwarancja: <span class="blue">24 miesiace</span><br />
+					Transport: <span class="blue"> Kurier</span><br />
+					Opis :<span class="blue"> {{product.description}} </span><br />
+                </div>
+                <div ng-if="product.disc > 0">
+                    <div class="prod_price_big">
+                        <span class="price">(-{{product.disc}}%)</span>
+                        <span class="reduce">{{product.price_gross}} zł</span>
+                        <span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0}} zł </span>
+                    </div>
+                </div>
+                <div ng-if="product.disc == 0">
+                    <div class="prod_price_big">
+						<span>{{product.price_gross}} zł</span>
+					</div>
+                </div>
+                <a href="" class="prod_buy" ng-click="addToCart(product.id_prod,product.price_gross-(product.disc*product.price_gross)/100)">Do koszyka</a>
+                <a ui-sref="main.products.editProduct" class="prod_buy" ng-click="getData(product.id_prod)" ng-show="showAdmin=='correct'">edytuj</a>
+            </div>
+        </div>
+    </div>
+</div>

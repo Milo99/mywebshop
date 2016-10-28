@@ -1,0 +1,62 @@
+		<div class="center_title_bar">Szczegóły zamówienia</div>
+		<div ng-show="showAdmin=='correct'" ng-repeat="order in orders | filter:{id_ord: orderId}">
+			<p>Numer zamówienia: {{order.id_ord}}</p> 
+			<p>Data zlożenia zamówienia: {{order.order_date}}</p>
+			<p>Wartość zamówienia: {{order.paid}} zł</p>
+			<h3>Dane klienta:</h3>
+			<div ng-repeat="user in theuser | filter:{id_user: order.id_user}">
+				<p>Numer: {{user.id_user}}</p>
+				<p>Imię: {{user.firstname}}</p>
+				<p>Nazwisko: {{user.lastname}}</p>
+				<p>Adres: {{user.address}}</p>
+				<p>Telefon: {{user.phone}}</p>
+				<p>Email: {{user.email}}</p>
+			</div>
+			<h3>Zamówione produkty:</h3>
+			<div ng-repeat="item in ordprod | filter:{id_ord: order.id_ord}">
+				<table>
+				  <tr>
+						<th></th>
+						<th>Nazwa Produktu</th>
+						<th>Cena netto</th>
+						<th>Cena brutto</th>
+						<th>Rabat</th>
+					</tr>
+					<tr ng-repeat="product in products | filter:{id_prod: item.id_prod}">
+						<th><img src="{{product.url_thumb}}" alt="" border="0" width="36" height="17" style="height:36px;" /></th>
+						<th>{{product.name_prod}}</th>
+						<th>{{(product.price_gross-((product.disc*product.price_gross)/100))/1.22 | number:0}}</th>
+						<th>{{product.price_gross-((product.disc*product.price_gross)/100) | number:0}}</th>
+						<th>{{product.disc}}</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div ng-show="showUser=='correct'" ng-repeat="order in orders | filter:{id_ord: orderId}">
+			<p>Numer zamówienia: {{order.id_ord}}</p> 
+			<p>Data zlożenia zamówienia: {{order.order_date}}</p>
+			<p>Wartość zamówienia: {{order.paid}} zł</p>
+			
+			<h3>Zamówione produkty:</h3>
+			<div ng-repeat="item in ordprod | filter:{id_ord: order.id_ord}">
+				<table>
+				  <tr>
+						<th></th>
+						<th>Nazwa Produktu</th>
+						<th>Cena netto</th>
+						<th>Cena brutto</th>
+						<th>Rabat</th>
+					</tr>
+					<tr ng-repeat="product in products | filter:{id_prod: item.id_prod}">
+						<th><img src="{{product.url_thumb}}" alt="" border="0" width="36" height="17" style="height:36px;" /></th>
+						<th>{{product.name_prod}}</th>
+						<th>{{(product.price_gross-((product.disc*product.price_gross)/100))/1.22 | number:0}}</th>
+						<th>{{product.price_gross-((product.disc*product.price_gross)/100) | number:0}}</th>
+						<th>{{product.disc}}</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		
+	

@@ -1,0 +1,38 @@
+<div ng-if="showUser!='correct'">
+	<p>Aby złożyć zamówienie musisz być zalogowany.</p>
+	<p>Jeśli nie masz konta, <a ui-sref="main.register">zarejestruj się</a>.</p>
+</div>
+<div ng-if="showUser=='correct' && mycart != 0">
+	<div class="center_title_bar">Twoje dane adresowe:</div>
+	<div ng-repeat="u in theuser | filter:{id_user: current}">
+		<div class="prod_box_big">
+			<div class="center_prod_box_big">
+				<div class="contact_form">
+					<div class="form_row">
+						<label class="contact"><strong>Imię:</strong></label>
+						<input type="text" class="contact_input" ng-model="u.firstname" />
+					</div>
+					<div class="form_row">
+						<label class="contact"><strong>Nazwisko:</strong></label>
+						<input type="text" class="contact_input" ng-model="u.lastname" />
+					</div>
+					<div class="form_row">
+						<label class="contact"><strong>Adres:</strong></label>
+						<input type="text" class="contact_input" ng-model="u.address" />
+					</div>
+					<div class="form_row">
+						<label class="contact"><strong>Email:</strong></label>
+						<input type="email" class="contact_input" ng-model="u.email" />
+					</div>
+					<div class="form_row">
+						<label class="contact"><strong>Telefon:</strong></label>
+						<input type="text" class="contact_input" ng-model="u.phone" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="float:right;">
+			<a ui-sref="main.home" ng-click="addOrder(); updateUser(u.id_user,u.firstname,u.lastname,u.address,u.email,u.phone)" class="prod_details">Zamawiam</a>
+		</div>
+	</div>
+</div>

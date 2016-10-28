@@ -1,0 +1,59 @@
+<!-- Show button if admin is logged -->
+<div ng-show="showAdmin=='correct'">
+	<div ng-hide="$state.includes('main.products.addProduct') || $state.includes('main.products.ordersList')" class="center_title_bar" style="margin-bottom:10px;">
+		<a ui-sref="main.products.addProduct" style="text-decoration:none">
+			<p style="margin-left:40%;">DODAJ PRODUKT</p>
+		</a>
+	</div>
+</div>
+	
+<div ui-view>
+	<!-- Nested State of productsView -->
+</div>
+  
+<!-- Hide products if shoppingCart State is active -->
+<div ng-hide="$state.includes('main.products.productDetails.shoppingCart') || $state.includes('main.products.ordersList')">
+	<div class="center_title_bar">Produkty {{cat}}
+		<div style="float:right;margin-right:20px;">
+			<label for="sortorder">Sortuj:</label>
+			<select name="sortorder" ng-model="sortorder">
+				<option selected value="name_prod">Nazwa</option>
+				<option value="price_gross-((disc*price_gross)/100)">Cena</option>
+			</select>
+		</div>
+	</div>
+	
+	<div class="prod_box" ng-repeat="product in products | filter:filterProducts | orderBy:sortorder | filter:{cat2:cat}">
+        <div class="center_prod_box">
+			<div class="product_title">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">{{product.name_prod}}</a>
+			</div>
+			<div class="product_img">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">
+					<img src="{{product.url_thumb}}" alt="" border="0" style="height:120px;"/>
+				</a>
+			</div>
+			<div ng-if="product.disc > 0">
+				<div class="prod_price">
+					<span class="reduce">{{product.price_gross}} zł</span>
+					<span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0 }} zł</span>
+				</div>
+			</div>
+			<div ng-if="product.disc == 0">
+				<div class="prod_price">
+					<span>{{product.price_gross}} zł</span>
+				</div>
+			</div>
+        </div>
+		<!-- Show if admin IS NOT logged -->
+        <div class="prod_details_tab" ng-hide="showAdmin=='correct'"> 
+			<a href="" class="prod_buy" ng-click="addToCart(product.id_prod,product.price_gross-(product.disc*product.price_gross)/100)">Do koszyka</a> 
+			<a ui-sref="main.products.productDetails" class="prod_details" ng-click="getData(product.id_prod);getmyitem()">Szczegóły</a>
+		</div>
+		<!-- Show button if admin IS logged -->
+		<div ng-show="showAdmin=='correct'">
+			<a ui-sref="main.products.editProduct" class="prod_buy" ng-click="getData(product.id_prod);getmyitem()">edytuj</a>
+			<a href="" ng-click="deleteItem(product.id_prod)" class="prod_details">usuń</a>
+		</div>
+    </div>
+</div>

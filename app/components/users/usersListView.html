@@ -1,0 +1,27 @@
+<div class="center_title_bar">Użytkownicy</div>
+<div value="margin-top:20px;" ng-show="showAdmin=='correct'">
+    <table>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Adres</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Login</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <th>{{user.firstname}}"</th>
+            <th>{{user.lastname}}</th>
+            <th>{{user.address}}</th>
+            <th>{{user.email}}</th>
+            <th>{{user.phone}}</th>
+            <th>{{user.username}}</th>
+            <th><input class="edit" type="text" ng-model="user.status" style="width:45px;"/></th>
+            <th><button ng-click="changeStatus(user.id_user,user.status)" class="edit-bt">zmień</button></th>
+            <th><button ng-click="deleteItem(user.id_user)" class="edit-bt">usuń</button></th>
+        </tr>
+    </table>
+</div>

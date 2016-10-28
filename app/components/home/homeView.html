@@ -1,0 +1,63 @@
+<!-- One Product Banner -->
+<div ng-controller="productsController" >
+	<div class="oferta" ng-repeat="product in products | filter: {banner: 1}">
+		<a ui-sref="main.productDetails" ng-click="getData(product.id_prod);getmyitem()">
+			<img src="{{product.url_thumb}}" border="0" class="oferta_img" alt="" />
+		</a>
+		<div class="oferta_details">
+			<div class="oferta_title">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">
+					{{product.name_prod}}
+				</a>
+			</div>
+			<div class="oferta_text"> {{product.description}} </div>
+			<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()" class="prod_buy">szczegóły</a> 
+		</div>
+	</div>
+</div>
+<!-- Recommended products -->
+<div ng-controller="productsController">
+	<div class="center_title_bar">Polecane produkty</div>
+	<div class="prod_box" ng-repeat="product in products | filter: {recommend: 1}">
+		<div class="center_prod_box">
+			<div class="product_title">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">{{product.name_prod}}</a>
+			</div>
+			<div class="product_img">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">
+					<img src="{{product.url_thumb}}" alt="" border="0" />
+				</a>
+			</div>
+			<div ng-if="product.disc > 0">
+				<div class="prod_price"><span class="reduce">{{product.price_gross}} zł</span> <span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0 }} zł</span></div>
+			</div>
+			<div ng-if="product.disc == 0">
+				<div class="prod_price"><span>{{product.price_gross}} zł</span></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- The newest products -->
+<div ng-controller="productsController">
+    <div class="center_title_bar">Najnowsze produkty</div>
+	<div class="prod_box" ng-repeat="product in products | filter: {timestamp}" ng-show="$index<3">
+		<div class="center_prod_box">
+			<div class="product_title">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">{{product.name_prod}}</a>
+			</div>
+			<div class="product_img">
+				<a ui-sref="main.products.productDetails" ng-click="getData(product.id_prod);getmyitem()">
+					<img src="{{product.url_thumb}}" alt="" border="0" />
+				</a>
+			</div>
+			<div ng-if="product.disc > 0">
+				<div class="prod_price"><span class="reduce">{{product.price_gross}} zł</span> <span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0 }} zł</span></div>
+			</div>
+			<div ng-if="product.disc == 0">
+				<div class="prod_price"><span>{{product.price_gross}} zł</span></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+      

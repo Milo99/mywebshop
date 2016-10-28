@@ -1,0 +1,52 @@
+
+<div class="center_title_bar">Napisz do nas</div>
+<div class="prod_box_big">
+    <div class="center_prod_box_big" ng-hide="showAdmin=='correct'">
+        <form ng-submit="addItem(firstname,lastname,email,message);firstname = null;lastname = null;email = null;message = null">
+            <div class="contact_form">
+                <div class="form_row">
+                    <label class="contact"><strong>Imię:</strong></label>
+                    <input type="text" class="contact_input" ng-model="firstname" required/>
+                    <span ng-show="firstname.$invalid">To pole jest wymagane</span>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Nazwisko:</strong></label>
+                    <input type="text" class="contact_input" ng-model="lastname" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Email:</strong></label>
+                    <input type="email" class="contact_input" ng-model="email" required/>
+                    <span ng-show="email.$invalid">To pole jest wymagane</span>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Wiadomość:</strong></label>
+                    <textarea class="contact_textarea" ng-model="message" required></textarea>
+                    <span ng-show="message.$invalid">To pole jest wymagane</span>
+                </div>
+                <div class="form_row">
+                    <input type="submit" value="wyślij" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="showAdmin=='correct'">
+        <table>
+            <tr>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+                <th>Wiadomość</th>
+                <th></th>
+            </tr>
+			<tr ng-repeat="contact in contacts">
+                <th><input class="edit" ng-model="contact.firstname" placeholder="{{contact.firstname}}" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="contact.lastname" placeholder="{{contact.lastname}}" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="contact.email" placeholder="{{contact.email}}" style="border:none;background:none;" readonly /></th>
+                <th><input class="edit" type="text" ng-model="contact.text" placeholder="{{contact.text}}" style="border:none;background:none;" readonly /></th>
+                <th><button ng-click="deleteItem(contact.id_mes)" class="edit-bt">usuń</button></th>
+            </tr>
+        </table>
+    </div>
+</div>
+	  

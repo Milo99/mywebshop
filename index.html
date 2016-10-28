@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pl" xml:lang="pl" xmlns="http://www.w3.org/1999/xhtml" ng-app="myshopApp">
+
+<head>
+    <title>Tramp.pl</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" /-->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="assets/css/iecss.css" />
+	<![endif]-->
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/angular-route.min.js"></script>
+    <script src="assets/js/angular-ui-router.js"></script>
+    <script src="assets/js/angular-cookies.min.js"></script>
+    <script src="assets/js/ng-simple-upload.js"></script>
+	
+    <script src="app/app.js"></script>
+	<!-- Controllers -->
+    <script src="app/components/main/mainController.js"></script>
+    <script src="app/components/brands/brandsListController.js"></script>
+    <script src="app/components/brands/brandsController.js"></script>
+    <script src="app/components/products/productsController.js"></script>
+    <script src="app/components/contact/contactController.js"></script>
+    <script src="app/components/specials/specialsController.js"></script>
+    <script src="app/components/shoppingCart/shoppingCartController.js"></script>
+    <script src="app/components/productDetails/productDetailsController.js"></script>
+    <script src="app/components/users/userController.js"></script>
+	<!-- Services -->
+    <script src="app/components/main/mainService.js"></script>
+    <script src="app/components/contact/contactsService.js"></script>
+	<script src="app/components/brands/brandsService.js"></script>
+    <script src="app/components/products/productsService.js"></script>
+    <script src="app/components/shoppingCart/shoppingCartService.js"></script>
+    <script src="app/components/users/userService.js"></script>
+	
+	<script src="app/shared/randomFilter.js"></script>
+    
+    <script type="text/javascript" src="assets/js/boxOver.js"></script>
+</head>
+
+<body>
+    <div ui-view></div>
+</body>
+
+</html>

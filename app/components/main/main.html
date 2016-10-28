@@ -1,0 +1,168 @@
+<div id="main_container">
+    <div id="header">
+        <div class="top_right">
+            <form style="float:right;margin-right:10px;">
+                <div ng-hide="showAdmin=='correct' || showUser=='correct'">
+                    <label>Login:</label>
+                    <input type="text" name="username" id="username" class="edit" ng-model="username" style="background-color:transparent;" />
+
+                    <label>Hasło:</label>
+                    <input type="password" name="password" id="password" class="edit" ng-model="password" style="background-color:transparent;" />
+
+                    <a ui-sref="main.home" style="margin-left:10px;text-decoration:none;" ng-click="getLoginData(username,password);username = null;password = null">Zaloguj</a>
+                    <a ui-sref="main.register" style="margin-left:10px;text-decoration:none;">Zarejestruj</a>
+                </div>
+                <div ng-show="showAdmin=='correct' || showUser=='correct'">
+                    <a ui-sref="main.home" ng-click="logout();cleanCart()">Wyloguj</a>
+                </div>
+            </form>
+        </div>
+        <div id="logo"> <a ui-sref="main.home"><img src="assets/img/logo.png" alt="" border="0" width="182" height="85" /></a> </div>
+    </div>
+    <div id="main_content">
+
+        <!-- start of mennu tab -->
+        <div id="menu_tab">
+            <ul class="menu">
+                <li ng-repeat="menu in menutab | filter:{ParentID: 0}"><a ui-sref="main.{{menu.url}}" class="nav" ng-click="removeCat()">{{menu.name}}</a></li>
+                <li style="float:right;"><a ui-sref="main.products.ordersList" class="nav" ng-show="showUser=='correct'">Twoje zamówienia</a></li>
+				<li style="float:right;"><a ui-sref="main.youraccount" class="nav" ng-show="showUser=='correct'">Twój profil</a></li>
+                <li style="float:right;"><a ui-sref="main.usersList" class="nav" ng-show="showAdmin=='correct'">Użytkownicy</a></li>
+				<li style="float:right;"><a ui-sref="main.products.ordersList" class="nav" ng-show="showAdmin=='correct'">Zamówienia</a></li>
+            </ul>
+        </div>
+        <!-- end of menu tab -->
+
+        <!-- start of left content -->
+        <div class="left_content">
+
+            <!-- start of left menu -->
+            <div class="title_box">Kategorie</div>
+			
+			<ul class="left_menu">
+                <li ng-repeat="menu in leftmenu | filter:{ParentID: 0}" ng-include="'LeftMenu'" ></li>
+            </ul>
+			
+            <script type="text/ng-template" id="LeftMenu">
+                <a ui-sref="main.products" ng-click="getCat(menu.name)">{{menu.name}}</a>
+                <ul ng-if="(leftmenu | filter: {ParentID: menu.id}).length > 0">
+                    <li ng-repeat="menu in leftmenu | filter:{ParentID: menu.id}" ng-include="'LeftMenu'" ></li>
+                </ul>
+            </script>
+            <!-- end of left menu -->
+
+            <div class="title_box">Produkt dnia</div>
+            <div class="border_box" ng-controller="productsController">
+                <div ng-repeat="product in products" ng-show="$index==1">
+                    <div class="product_title">
+                        <a ui-sref="main.products.productDetails" ng-mousedown="getData(product.id_prod);getmyitem()">{{product.name_prod}}</a>
+                    </div>
+                    <div class="product_img">
+                        <a ui-sref="main.products.productDetails" ng-mousedown="getData(product.id_prod);getmyitem()">
+                            <img src="{{product.url_thumb}}" alt="" border="0" />
+                        </a>
+                    </div>
+                    <div ng-if="product.disc > 0">
+                        <div class="prod_price">
+                            <span class="reduce">{{product.price_gross}} zł</span>
+                            <span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0 }} zł</span>
+                        </div>
+                    </div>
+                    <div ng-if="product.disc == 0">
+                        <div class="prod_price">
+                            <span>{{product.price_gross}} zł</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			<div ng-hide="showAdmin=='correct'">
+				<div class="title_box">Newsletter</div>
+				<form ng-submit="addEmail(email)">
+					<div class="border_box">
+						<input type="email" name="newsletter" class="newsletter_input" value="twój email" ng-model="email" />
+						<span ng-show="email.$invalid">To pole jest wymagane</span>
+						<input type="submit" value="zapisz się" />
+					</div>
+				</form>
+			</div>
+
+            <div class="banner_adds">
+                <a href=""><img src="" alt="" border="0" /></a>
+            </div>
+        </div>
+        <!-- end of left content -->
+
+        <div class="center_content" ui-view>
+			<!--
+			This DIV loads templates depending upon main.
+			-->
+        </div>
+
+        <!-- start right content -->
+        <div class="right_content">
+            <div class="title_box">Szukaj</div>
+            <div class="border_box">
+                <input type="text" name="newsletter" class="newsletter_input" ng-model="filterProducts" placeholder="wpisz produkt" />
+                <a ui-sref="main.products" class="join">szukaj</a> </div>
+
+            <!-- Start Shopping Cart -->
+			<div class="shopping_cart" ng-controller="productsController" ng-hide="showAdmin=='correct'">
+                <div class="title_box">Koszyk</div>
+                <div class="cart_details">ilość:{{mycart.length}}<br />
+                    <span class="border_cart"></span> Suma: <span class="price">{{sum()}} zł</span> </div>
+                <div class="cart_icon">
+                    <a ui-sref="main.products.productDetails.shoppingCart"><img src="assets/img/shoppingcart.png" alt="" width="35" height="35" border="0" /></a>
+                </div>
+            </div>
+			<!-- End Shopping Cart -->
+
+            <div class="title_box">Co nowego?</div>
+            <div class="border_box" ng-controller="productsController">
+                <div ng-repeat="product in products | filter: {newone: 1}">
+                    <div class="product_title">
+                        <a ui-sref="main.products.productDetails" ng-mousedown="getData(product.id_prod);getmyitem()">{{product.name_prod}}</a>
+                    </div>
+                    <div class="product_img">
+                        <a ui-sref="main.products.productDetails" ng-mousedown="getData(product.id_prod);getmyitem()">
+                            <img src="{{product.url_thumb}}" alt="" border="0" />
+                        </a>
+                    </div>
+                    <div ng-if="product.disc > 0">
+                        <div class="prod_price">
+                            <span class="reduce">{{product.price_gross}} zł</span>
+                            <span class="price">{{product.price_gross-((product.disc*product.price_gross)/100) | number:0 }} zł</span>
+                        </div>
+                    </div>
+                    <div ng-if="product.disc == 0">
+                        <div class="prod_price">
+                            <span>{{product.price_gross}} zł</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title_box">Producenci</div>
+            <ul class="left_menu" ng-controller="brandsListController">
+                <li ng-repeat="brand in brands" ng-show="$index<5">
+                    <a href="#/main/brands/{{brand.id_bra}}">{{brand.name_bra}}</a>
+                </li>
+            </ul>
+
+            <div class="banner_adds">
+                <a href=""><img src="" alt="" border="0" /></a>
+            </div>
+
+        </div>
+        <!-- end of right content -->
+    </div>
+
+    <!-- end of main content -->
+    <div class="footer">
+        <div class="left_footer"> <img src="assets/img/footer_logo.png" alt="" width="89" height="42" /> </div>
+        <div class="center_footer"> Kamil Kusiak 2016<br />
+            <img src="assets/img/payment.gif" alt="" /> </div>
+        <div class="right_footer"> <a ui-sref="main.home">strona glówna</a> <a ui-sref="main.about">o nas</a><a ui-sref="main.contact">kontakt</a> </div>
+    </div>
+</div>
+<!-- end of main_container -->

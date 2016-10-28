@@ -1,0 +1,30 @@
+<div class="center_title_bar">Dodaj produkt</div>
+<div class="prod_box_big">
+    <div class="center_prod_box_big">
+        <div class="contact_form">
+            <div class="form_row">
+                <label class="contact"><strong>Nazwa:</strong></label>
+                <input type="text" class="contact_input" ng-model="name" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Cena brutto:</strong></label>
+                <input type="text" class="contact_input" ng-model="price" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Rabat (%):</strong></label>
+                <input type="text" class="contact_input" ng-model="disc" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>URL zdjęcia:</strong></label>
+                <input type="text" class="contact_input" ng-model="foto" />
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Opis:</strong></label>
+                <textarea class="contact_textarea" ng-model="description"></textarea>
+            </div>
+            <div class="form_row" ng-click="addItem(name,price,disc,foto,description);name = null;price = null;disc = null;foto = null;description = null">
+                <a href="" class="prod_details">dodaj</a>
+            </div>
+        </div>
+    </div>
+</div>

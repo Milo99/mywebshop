@@ -1,0 +1,42 @@
+<div class="center_title_bar">Twoje konto</div>
+<div ng-repeat="user in users | filter:{id_user: current}">
+    <div class="prod_box_big">
+        <div class="center_prod_box_big">
+            <div class="contact_form">
+                <div class="form_row">
+                    <label class="contact"><strong>Imię:</strong></label>
+                    <input type="text" class="contact_input" ng-model="user.firstname" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Nazwisko:</strong></label>
+                    <input type="text" class="contact_input" ng-model="user.lastname" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Adres:</strong></label>
+                    <input type="text" class="contact_input" ng-model="user.address" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Email:</strong></label>
+                    <input type="email" class="contact_input" ng-model="user.email" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Telefon:</strong></label>
+                    <input type="text" class="contact_input" ng-model="user.phone" />
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Login:</strong></label>
+                    <input type="text" class="contact_input" ng-model="user.username" required/>
+                    <span ng-show="firstname.$invalid">To pole jest wymagane</span>
+                </div>
+                <div class="form_row">
+                    <label class="contact"><strong>Hasło:</strong></label>
+                    <input type="password" class="contact_input" ng-model="user.password" required/>
+                    <span ng-show="firstname.$invalid">To pole jest wymagane</span>
+                </div>
+                <div class="form_row" ng-click="changeItem(user.id_user,user.firstname,user.lastname,user.address,user.email,user.phone,user.username,user.password)">
+                    <a href="" class="prod_details">Zapisz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div>
+	<div class="center_title_bar">Twój koszyk</div>
+	<div ng-if="mycart == 0">
+		<h3>Twój koszyk jest pusty.</h3>
+	</div>
+	<div ng-if="mycart != 0">
+		<table ng-repeat="item in mycart">
+		  <tr>
+				<th></th>
+				<th>Nazwa Produktu</th>
+				<th>Cena netto</th>
+				<th>Cena brutto</th>
+				<th>Ilość</th>
+				<th>Rabat</th>
+				<th>Wartość</th>
+				<th ng-hide="$state.includes('main.products.productDetails.shoppingCart.order')"></th>
+			</tr>
+			<tr ng-repeat="product in products | filter:{id_prod: item.myid}">
+				<th><img src="{{product.url_thumb}}" alt="" border="0" width="36" height="17" style="height:36px;" /></th>
+				<th>{{product.name_prod}}</th>
+				<th>{{(product.price_gross-((product.disc*product.price_gross)/100))/1.22 | number:0}}</th>
+				<th>{{product.price_gross-((product.disc*product.price_gross)/100) | number:0}}</th>
+				<th ng-hide="$state.includes('main.products.productDetails.shoppingCart.order')"><input type="text" ng-model="item.qty" style="width:20px;" /></th>
+				<th ng-show="$state.includes('main.products.productDetails.shoppingCart.order')"><input type="text" ng-model="item.qty" style="width:20px;" readonly /></th>
+				<th>{{product.disc}}</th>
+				<th>{{item.price * item.qty}}</th>
+				<th ng-hide="$state.includes('main.products.productDetails.shoppingCart.order')"><button ng-click="removeFromCart($index)" class="edit-bt">usuń</button></th>
+			</tr>
+		</table>
+		
+		<div style="float:right;margin-right:80px;">
+			<label style="margin-right:10px;"><strong>Razem:</strong></label>
+			<input type="text" ng-model="sum()" style="width:60px;border:none;" readonly />
+		</div>
+		<div class="form_row">
+			<label class="contact"><strong>Uwagi:</strong></label>
+			<textarea class="contact_textarea" ng-model="comments" ng-hide="$state.includes('main.products.productDetails.shoppingCart.order')"></textarea>
+			<textarea class="contact_textarea" ng-model="comments" ng-show="$state.includes('main.products.productDetails.shoppingCart.order')" readonly></textarea>
+		</div>
+		
+		<div ng-if="showUser=='correct'" ng-hide="$state.includes('main.products.productDetails.shoppingCart.order')" style="float:right;">
+			<a ui-sref="main.products.productDetails.shoppingCart.order" ng-click="addItem(current, sum(), comments)" class="prod_details">Zamawiam</a>
+		</div>
+		<div ng-if="showUser!='correct'" style="float:right;">
+			<a ui-sref="main.products.productDetails.shoppingCart.order" class="prod_details">Zamawiam</a>
+		</div>
+	</div>
+	<div ui-view></div>
+</div>
